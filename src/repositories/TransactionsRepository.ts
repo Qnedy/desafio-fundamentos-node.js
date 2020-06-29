@@ -19,9 +19,9 @@ class TransactionsRepository {
     this.transactions = [];
   }
 
-  // public all(): Transaction[] {
-  //   // TODO
-  // }
+  public all(): Transaction[] {
+    return this.transactions;
+  }
 
   // public getBalance(): Balance {
   //   // TODO
