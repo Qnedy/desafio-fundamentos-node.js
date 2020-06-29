@@ -15,8 +15,14 @@ class CreateTransactionService {
   }
 
   public execute({ title, value, type }: TransactionDTO): Transaction {
+    const { total } = this.transactionsRepository.getBalance();
+
     if (type !== 'income' && type !== 'outcome') {
-      throw Error('Tipo de transação inválido.');
+      throw Error('Invalid transaction type.');
+    }
+
+    if (type === 'outcome' && value > total) {
+      throw Error('You do not have this balance for withdrawal.');
     }
 
     const transaction = this.transactionsRepository.create({
